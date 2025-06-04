@@ -4,16 +4,12 @@
 
 <template>
     <div>
-        <header>
-            header
-        </header>
+        <MainHeader />
 
         <main>
             <slot />
         </main>
 
-        <footer>
-            footer
-        </footer>
+        <MainFooter />
     </div>
 </template>
