@@ -1,11 +1,9 @@
-<script lang="ts">
+<script lang="ts" setup>
 
 </script>
 
 <template>
-    <section>
-        <h1>
-            main
-        </h1>
-    </section>
+    <div>
+        <MainJumbo />
+    </div>
 </template>
