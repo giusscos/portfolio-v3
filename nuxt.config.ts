@@ -6,6 +6,20 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/content',
-    '@nuxtjs/tailwindcss'
-  ]
+    '@nuxtjs/tailwindcss',
+    'nuxt-lucide-icons'
+  ],
+  app: {
+    head: {
+      script: [
+        {
+        src: 'https://contra.com/static/embed/sdk.js',
+        async: true
+      }
+    ]
+    }
+  },
+  lucide: {
+    namePrefix: 'LIcon'
+  }
 })
