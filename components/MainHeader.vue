@@ -87,7 +87,7 @@ const toggleMenu = () => {
     <header class="p-2 fixed top-0 w-full z-50">
         <h1 class="sr-only">Giuseppe Cosenza</h1>
         <!-- Desktop Navigation -->
-        <nav class="hidden md:block w-fit h-16 px-4 mx-auto bg-white/50 rounded-full border border-neutral-300 backdrop-blur-sm backdrop-saturate-200 shadow">
+        <nav class="hidden md:block w-fit h-16 px-4 mx-auto bg-white/80 rounded-full border border-neutral-300 backdrop-blur-xl backdrop-saturate-200 shadow">
             <ul class="w-full h-full flex gap-8 justify-center items-center">
                 <li>
                     <NuxtLink to="/" title="Giuseppe Cosenza" aria-label="Giuseppe Cosenza">

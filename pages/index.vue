@@ -5,5 +5,7 @@
 <template>
     <div>
         <MainJumbo />
+
+        <MainWorks />
     </div>
 </template>
