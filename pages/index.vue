@@ -7,5 +7,7 @@
         <MainJumbo />
 
         <MainWorks />
+
+        <MainHowItWorks />
     </div>
 </template>
