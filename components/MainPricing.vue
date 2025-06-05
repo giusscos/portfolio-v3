@@ -71,12 +71,9 @@ const pricingCards = [
               <LIconBadgeCheck class="size-5 fill-amber-500 shrink-0" />
               <span>{{ feature }}</span>
             </li>
-          </ul>
-          <NuxtLink :to="card.ctaLink" external target="_blank"
-            class="group inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-neutral-900 hover:bg-neutral-900 hover:text-white font-medium hover:shadow-md shadow-amber-600 transition duration-500 ease-in-out w-full justify-center mt-auto">
-            {{ card.ctaText }}
-            <LIconArrowUpRight class="size-5 rotate-45 group-hover:rotate-0 transition-transform duration-500" />
-          </NuxtLink>
+          </ul> 
+          
+          <BookCallButton :text="card.ctaText" :url="card.ctaLink" class="mt-auto" />
         </div>
       </div>
     </div>

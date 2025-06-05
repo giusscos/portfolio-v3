@@ -29,15 +29,7 @@ const services = ref([
                 </div>
             </div>
 
-            <NuxtLink 
-                external
-                target="_blank"
-                to="https://giusscos.it" 
-                class="group inline-flex items-center gap-2 px-8 py-3 rounded-full border-2 border-neutral-900 hover:bg-neutral-900 hover:text-white font-medium hover:shadow-md shadow-amber-600 transition duration-500 ease-in-out"
-            >
-                Let's Work Together
-                <LIconArrowUpRight class="size-5 rotate-45 group-hover:rotate-0 transition-transform duration-500" />
-            </NuxtLink>
+            <BookCallButton :text="`Let's Work Together`" />
             
             <NuxtLink external target="_blank" to="https://contra.com/giusscos/reviews" class="group flex flex-nowrap items-center justify-center gap-2 whitespace-nowrap">
                 <span class="flex flex-nowrap gap-2 items-center justify-center whitespace-nowrap font-semibold">5/5 <LIconStar class="size-5 fill-amber-300 inline-block" /></span> <span> See what my clients say</span> <LIconArrowUpRight class="size-5 rotate-45 group-hover:rotate-0 transition-transform duration-500" />

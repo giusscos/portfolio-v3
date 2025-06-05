@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { gsap } from 'gsap';
 
 type MainNavLink = {
     id: string;
@@ -36,50 +35,6 @@ const menuItemsRef = ref<HTMLElement | null>(null)
 
 const toggleMenu = () => {
     isMenuOpen.value = !isMenuOpen.value
-    
-    if (isMenuOpen.value) {
-        // Open menu animation
-        gsap.to(menuRef.value, {
-            opacity: 1,
-            visibility: 'visible',
-            duration: 0.3,
-            ease: 'power2.out'
-        })
-        
-        if (menuItemsRef.value) {
-            gsap.fromTo(Array.from(menuItemsRef.value.children), 
-                { 
-                    opacity: 0,
-                    y: 20
-                },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.4,
-                    stagger: 0.1,
-                    ease: 'power2.out'
-                }
-            )
-        }
-    } else {
-        if (menuItemsRef.value) {
-            gsap.to(Array.from(menuItemsRef.value.children), {
-                opacity: 0,
-                y: -20,
-                duration: 0.3,
-                stagger: 0.05,
-                ease: 'power2.in'
-            })
-        }
-        
-        gsap.to(menuRef.value, {
-            opacity: 0,
-            visibility: 'hidden',
-            duration: 0.3,
-            delay: 0.2,
-            ease: 'power2.in'
-        })
-    }
 }
 </script>
 
@@ -115,13 +70,7 @@ const toggleMenu = () => {
                 </li>
 
                 <li>
-                    <NuxtLink external target="_blank" to="https://giusscos.it" title="Book a call with Giuseppe"
-                        aria-label="Book a call"
-                        class="group flex gap-2 flex-nowrap px-6 py-2 rounded-full border border-neutral-900 hover:bg-neutral-900 hover:text-white font-medium hover:shadow-md shadow-amber-600 transition duration-500 ease-in-out whitespace-nowrap">
-                        Book a call
-                        <LIconArrowUpRight :stroke-width="1.5"
-                            class="rotate-45 group-hover:rotate-0 transition-transform duration-500" />
-                    </NuxtLink>
+                    <BookCallButton />
                 </li>
             </ul>
         </nav>
@@ -160,8 +109,8 @@ const toggleMenu = () => {
         <div 
             ref="menuRef"
             id="mobile-menu"
-            class="h-fit fixed md:hidden inset-y-20 inset-x-2 p-2 bg-white/80 rounded-3xl border border-neutral-300 backdrop-blur-xl backdrop-saturate-200 shadow overflow-hidden z-50 opacity-0 invisible transition-all duration-300"
-            :class="{ 'opacity-100 visible': isMenuOpen }"
+            class="h-fit fixed md:hidden inset-y-20 inset-x-2 p-2 bg-white/80 rounded-3xl border border-neutral-300 backdrop-blur-xl backdrop-saturate-200 shadow overflow-hidden z-50 transition-all duration-300"
+            :class="isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'"
             @click="toggleMenu"
         >
             <nav class="h-fit py-10" @click.stop>
@@ -169,7 +118,14 @@ const toggleMenu = () => {
                     ref="menuItemsRef"
                     class="flex flex-col items-center gap-8 text-2xl"
                 >
-                    <li v-for="link in links" :key="link.id">
+                    <li v-for="(link, index) in links" :key="link.id" 
+                        class="transition-all duration-300"
+                        :style="{
+                            opacity: isMenuOpen ? 1 : 0,
+                            transform: isMenuOpen ? 'translateY(0)' : 'translateY(20px)',
+                            transitionDelay: isMenuOpen ? `${index * 100}ms` : `${(links.length - index - 1) * 50}ms`
+                        }"
+                    >
                         <NuxtLink 
                             :to="link.to" 
                             :title="link.title" 
@@ -182,7 +138,13 @@ const toggleMenu = () => {
                         </NuxtLink>
                     </li>
 
-                    <li>
+                    <li class="transition-all duration-300"
+                        :style="{
+                            opacity: isMenuOpen ? 1 : 0,
+                            transform: isMenuOpen ? 'translateY(0)' : 'translateY(20px)',
+                            transitionDelay: isMenuOpen ? `${links.length * 100}ms` : '0ms'
+                        }"
+                    >
                         <NuxtLink 
                             external 
                             target="_blank" 
@@ -196,19 +158,14 @@ const toggleMenu = () => {
                         </NuxtLink>
                     </li>
 
-                    <li>
-                        <NuxtLink 
-                            external 
-                            target="_blank" 
-                            to="https://giusscos.it" 
-                            title="Book a call with Giuseppe"
-                            aria-label="Book a call"
-                            class="group flex flex-nowrap gap-2 items-center px-6 py-2 rounded-full border-2 border-neutral-900 hover:bg-neutral-900 hover:text-white font-medium hover:shadow-md shadow-amber-600 transition duration-500 ease-in-out whitespace-nowrap"
-                            @click="toggleMenu"
-                        >
-                            Book a call
-                            <LIconArrowUpRight :stroke-width="2" class="rotate-45 group-hover:rotate-0 transition-transform duration-500" />
-                        </NuxtLink>
+                    <li class="transition-all duration-300"
+                        :style="{
+                            opacity: isMenuOpen ? 1 : 0,
+                            transform: isMenuOpen ? 'translateY(0)' : 'translateY(20px)',
+                            transitionDelay: isMenuOpen ? `${(links.length + 1) * 100}ms` : '0ms'
+                        }"
+                    >
+                        <BookCallButton :onClick="toggleMenu" />
                     </li>
                 </ul>
             </nav>
