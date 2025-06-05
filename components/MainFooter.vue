@@ -1,37 +1,6 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
 
-const socialLinks = ref([
-    {
-        id: "x",
-        title: "Follow me on X",
-        label: "X",
-        to: "https://x.com/giusscos",
-        letter: "X"
-    },
-    {
-        id: "github",
-        title: "Follow me on GitHub",
-        label: "GitHub",
-        to: "https://github.com/giusscos",
-        letter: "G"
-    },
-    {
-        id: "contra",
-        title: "Hire me on Contra",
-        label: "Contra",
-        to: "https://on.contra.com/mtqLzh",
-        letter: "C"
-    },
-    {
-        id: "reddit",
-        title: "Follow me on Reddit",
-        label: "Reddit",
-        to: "https://reddit.com/u/giusscos",
-        letter: "R"
-    }
-]);
-
 const footerRef = ref<HTMLElement | null>(null);
 const gradientVisible = ref(false);
 
@@ -95,20 +64,9 @@ onMounted(() => {
                             </div>
                             <div class="flex flex-col gap-0 justify-center items-center">
                                 <h2 class="text-xl font-semibold text-white">Giuseppe Cosenza</h2>
-                                <ul class="flex justify-center items-center gap-4 mt-2">
-                                    <li v-for="link in socialLinks" :key="link.id">
-                                        <NuxtLink 
-                                            :to="link.to" 
-                                            :title="link.title" 
-                                            :aria-label="link.label"
-                                            external
-                                            target="_blank"
-                                            class="flex items-center justify-center w-10 h-10 rounded-full bg-neutral-800 hover:bg-amber-500 text-neutral-300 hover:text-white transition-colors duration-300 shadow-sm text-lg font-bold"
-                                        >
-                                            <span>{{ link.letter }}</span>
-                                        </NuxtLink>
-                                    </li>
-                                </ul>
+                                <div class="mt-2">
+                                    <SocialLinks />
+                                </div>
                             </div>
                         </div>
                     </div>
