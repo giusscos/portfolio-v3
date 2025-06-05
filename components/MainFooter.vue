@@ -1,27 +1,6 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
 
-const navLinks = ref([
-    {
-        id: "works",
-        title: "Navigate to Works page",
-        label: "Works",
-        to: "/works"
-    },
-    {
-        id: "about",
-        title: "Navigate to About page",
-        label: "About",
-        to: "/about"
-    },
-    {
-        id: "use-cases",
-        title: "Navigate to Use Cases page",
-        label: "Use Cases",
-        to: "/use-cases"
-    }
-]);
-
 const socialLinks = ref([
     {
         id: "x",
@@ -38,18 +17,18 @@ const socialLinks = ref([
         letter: "G"
     },
     {
-        id: "reddit",
-        title: "Follow me on Reddit",
-        label: "Reddit",
-        to: "https://reddit.com/u/giusscos",
-        letter: "R"
-    },
-    {
         id: "contra",
         title: "Hire me on Contra",
         label: "Contra",
         to: "https://on.contra.com/mtqLzh",
         letter: "C"
+    },
+    {
+        id: "reddit",
+        title: "Follow me on Reddit",
+        label: "Reddit",
+        to: "https://reddit.com/u/giusscos",
+        letter: "R"
     }
 ]);
 
@@ -74,7 +53,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <footer ref="footerRef" class="py-12 px-4 bg-black relative overflow-hidden">
+    <footer ref="footerRef" class="py-20 px-4 bg-black relative overflow-hidden">
         <!-- SVG Granular Noise Effect -->
         <svg width="0" height="0" style="position:absolute">
             <filter id="noise-filter">
@@ -98,52 +77,39 @@ onMounted(() => {
                 gradientVisible ? 'opacity-100 translate-y-0' : 'opacity-50 translate-y-full'
             ]"></div>
         </div>
-        <div class="max-w-7xl mx-auto relative">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="max-w-7xl mx-auto relative py-10">
+            <div class="grid grid-cols-1 gap-8">
                 <!-- Profile, Name, and Socials Column -->
-                <div class="flex flex-col items-start gap-6">
-                    <div class="flex items-center gap-0 ">
-                        <div class="size-24">
+                <div class="flex flex-col items-center gap-6">
+                    <div class="flex flex-col justify-center items-center gap-0 ">
+                        <div class="size-24 md:size-32">
                             <NuxtImg 
                                 format="webp" 
                                 src="/profile.png" 
                                 alt="Giuseppe Cosenza profile picture"
                                 :placeholder="100" 
                                 fit="cover" 
-                                class="size-full object-contain object-center rounded-full" 
+                                class="size-full object-contain object-center rounded-full shrink-0" 
                             />
                         </div>
-                        <h2 class="text-xl font-semibold text-white">Giuseppe Cosenza (giusscos)</h2>
+                        <div class="flex flex-col gap-0 justify-center items-center">
+                            <h2 class="text-xl font-semibold text-white">Giuseppe Cosenza</h2>
+                            <ul class="flex justify-center items-center gap-4 mt-2">
+                                <li v-for="link in socialLinks" :key="link.id">
+                                    <NuxtLink 
+                                        :to="link.to" 
+                                        :title="link.title" 
+                                        :aria-label="link.label"
+                                        external
+                                        target="_blank"
+                                        class="flex items-center justify-center w-10 h-10 rounded-full bg-neutral-800 hover:bg-amber-500 text-neutral-300 hover:text-white transition-colors duration-300 shadow-sm text-lg font-bold"
+                                    >
+                                        <span>{{ link.letter }}</span>
+                                    </NuxtLink>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <ul class="flex gap-4 mt-2">
-                        <li v-for="link in socialLinks" :key="link.id">
-                            <NuxtLink 
-                                :to="link.to" 
-                                :title="link.title" 
-                                :aria-label="link.label"
-                                external
-                                target="_blank"
-                                class="flex items-center justify-center w-10 h-10 rounded-full bg-neutral-800 hover:bg-amber-500 text-neutral-300 hover:text-white transition-colors duration-300 shadow-sm text-lg font-bold"
-                            >
-                                <span>{{ link.letter }}</span>
-                            </NuxtLink>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Navigation Links Column -->
-                <div class="flex flex-col gap-2 justify-center">
-                    <ul class="space-y-3">
-                        <li v-for="link in navLinks" :key="link.id">
-                            <NuxtLink 
-                                :to="link.to" 
-                                :title="link.title" 
-                                :aria-label="link.label"
-                                class="flex items-center gap-2 text-neutral-300 hover:text-amber-500 transition-colors duration-300 font-medium"
-                            >
-                                <span>{{ link.label }}</span>
-                            </NuxtLink>
-                        </li>
-                    </ul>
                 </div>
             </div>
             <!-- Copyright -->

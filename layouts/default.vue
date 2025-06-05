@@ -6,7 +6,7 @@
     <div>
         <MainHeader />
 
-        <main>
+        <main class="min-h-screen">
             <slot />
         </main>
 

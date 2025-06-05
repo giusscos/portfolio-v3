@@ -27,50 +27,54 @@ const works = ref([
 </script>
 
 <template>
-    <section class="py-20 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-wrap gap-2 items-center justify-between mb-12">
-                <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 whitespace-nowrap">My recent works</h2>
-                <NuxtLink 
-                    to="/works" 
-                    class="group flex flex-nowrap items-center gap-2 text-neutral-600 hover:text-amber-600 transition-colors duration-300 whitespace-nowrap"
-                >
-                    View all works
-                    <LIconArrowUpRight class="size-5 rotate-45 group-hover:rotate-0 transition-transform duration-500" />
-                </NuxtLink>
+    <section class="min-h-screen flex items-center justify-center px-4 py-20 md:py-32 bg-white">
+        <div class="max-w-7xl mx-auto w-full text-center space-y-8">
+            <div class="space-y-4">
+                <h2 class="text-4xl md:text-5xl font-bold text-neutral-900">
+                    My recent works
+                </h2>
+                <p class="text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto">
+                    Here are some of my latest projects. Each one represents a unique challenge and solution.
+                </p>
             </div>
 
-            <div class="relative">
-                <div class="flex flex-wrap justify-center gap-6 px-4 md:px-8">
-                    <div 
-                        v-for="work in works" 
-                        :key="work.id"
-                        class="w-[320px] h-[480px] rounded-2xl bg-white border border-neutral-200 shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                    >
-                        <div class="p-6 space-y-4">
-                            <h3 class="text-xl font-semibold text-neutral-900">{{ work.title }}</h3>
-                            <p class="text-neutral-600">{{ work.description }}</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span 
-                                    v-for="tag in work.tags" 
-                                    :key="tag"
-                                    class="px-3 py-1 text-sm bg-amber-100 text-amber-800 rounded-full"
-                                >
-                                    {{ tag }}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="relative h-1/2">
-                            <NuxtImg 
-                                :src="work.image" 
-                                :alt="work.title"
-                                class="w-full h-full object-cover"
-                                loading="lazy"
-                            />
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div 
+                    v-for="work in works" 
+                    :key="work.id"
+                    class="group bg-white border border-neutral-200 rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+                >
+                    <div class="relative h-48">
+                        <NuxtImg 
+                            :src="work.image" 
+                            :alt="work.title"
+                            class="w-full h-full object-cover"
+                            loading="lazy"
+                        />
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-xl font-semibold text-neutral-900">{{ work.title }}</h3>
+                        <p class="text-neutral-600">{{ work.description }}</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span 
+                                v-for="tag in work.tags" 
+                                :key="tag"
+                                class="px-3 py-1 text-sm bg-amber-100 text-amber-800 rounded-full"
+                            >
+                                {{ tag }}
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <NuxtLink 
+                to="/works" 
+                class="group inline-flex items-center gap-2 px-8 py-3 rounded-full border-2 border-neutral-900 hover:bg-neutral-900 hover:text-white font-medium hover:shadow-md shadow-amber-600 transition duration-500 ease-in-out"
+            >
+                View all works
+                <LIconArrowUpRight class="size-5 rotate-45 group-hover:rotate-0 transition-transform duration-500" />
+            </NuxtLink>
         </div>
     </section>
 </template>
