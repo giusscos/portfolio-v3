@@ -9,5 +9,11 @@
         <MainWorks />
 
         <MainHowItWorks />
+
+        <MainPricing />
+
+        <MainFaq />
+
+        <MainCta />
     </div>
 </template>

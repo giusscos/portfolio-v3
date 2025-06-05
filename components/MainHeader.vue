@@ -160,14 +160,11 @@ const toggleMenu = () => {
         <div 
             ref="menuRef"
             id="mobile-menu"
-            class="h-fit fixed inset-y-20 inset-x-2 p-2 bg-white/80 rounded-3xl border border-neutral-300 backdrop-blur-xl backdrop-saturate-200 shadow overflow-hidden z-50 opacity-0 invisible transition-all duration-300 md:hidden"
+            class="h-fit fixed md:hidden inset-y-20 inset-x-2 p-2 bg-white/80 rounded-3xl border border-neutral-300 backdrop-blur-xl backdrop-saturate-200 shadow overflow-hidden z-50 opacity-0 invisible transition-all duration-300"
             :class="{ 'opacity-100 visible': isMenuOpen }"
             @click="toggleMenu"
         >
-            <nav 
-                class="h-fit py-10"
-                @click.stop
-            >
+            <nav class="h-fit py-10" @click.stop>
                 <ul 
                     ref="menuItemsRef"
                     class="flex flex-col items-center gap-8 text-2xl"
