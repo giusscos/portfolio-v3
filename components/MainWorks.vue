@@ -48,7 +48,7 @@ const themeGap = 24; // px, gap tra immagini (md:gap-6)
 </script>
 
 <template>
-    <section class="min-h-screen flex items-center justify-center px-4 py-20 md:py-32 bg-white">
+    <section id="works" class="min-h-screen flex items-center justify-center px-4 py-20 md:py-32 bg-white">
         <div class="max-w-7xl mx-auto w-full text-center space-y-8">
             <div class="space-y-4">
                 <h2 class="text-4xl md:text-5xl font-bold text-neutral-900">

@@ -42,7 +42,7 @@ const steps = ref([
 </script>
 
 <template>
-    <section class="py-20 px-4">
+    <section id="how" class="py-20 px-4">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-wrap gap-2 items-center justify-center mb-12">
                 <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 whitespace-nowrap">

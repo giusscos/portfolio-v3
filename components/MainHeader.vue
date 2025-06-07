@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 
 type MainNavLink = {
     id: string;
@@ -26,15 +26,59 @@ const links = ref<MainNavLink[]>([
         title: "Scroll to Pricing section",
         label: "Pricing",
         to: "#pricing"
+    },
+    {
+        id: "faq",
+        title: "Scroll to FAQ section",
+        label: "FAQ",
+        to: "#faq"
     }
 ])
 
 const isMenuOpen = ref(false)
 const menuRef = ref<HTMLElement | null>(null)
 const menuItemsRef = ref<HTMLElement | null>(null)
+const activeSection = ref('');
 
 const toggleMenu = () => {
     isMenuOpen.value = !isMenuOpen.value
+}
+
+function handleScroll() {
+  const sectionIds = links.value.map(link => link.to.replace('#', ''));
+  let found = false;
+  for (let i = 0; i < sectionIds.length; i++) {
+    const el = document.getElementById(sectionIds[i]);
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= 80 && rect.bottom > 80) {
+        activeSection.value = sectionIds[i];
+        found = true;
+        break;
+      }
+    }
+  }
+  if (!found) activeSection.value = '';
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  nextTick(() => handleScroll());
+});
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
+
+function scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => {
+      isMenuOpen.value = false;
+    }, 400);
+  } else {
+    isMenuOpen.value = false;
+  }
 }
 </script>
 
@@ -55,19 +99,27 @@ const toggleMenu = () => {
                 </li>
 
                 <li v-for="link in links" :key="link.id">
-                    <NuxtLink :to="link.to" :title="link.title" :aria-label="link.label" active-class="before:size-2"
-                        class="flex items-center gap-2 hover:text-amber-600 transition-colors duration-300 font-medium whitespace-nowrap before:content-[''] before:size-0 before:rounded-full before:transition-all before:duration-300 before:bg-amber-600">
+                    <a
+                        :href="link.to"
+                        :title="link.title"
+                        :aria-label="link.label"
+                        @click.prevent="scrollToSection(link.to.replace('#', ''))"
+                        :class="[
+                          'flex items-center gap-2 transition-colors duration-300 font-medium whitespace-nowrap before:content-[\'\'] before:rounded-full before:transition-all before:duration-300 before:bg-amber-600',
+                          activeSection === link.to.replace('#', '') ? 'text-amber-600 font-bold before:size-2 before:mr-2' : 'hover:text-amber-600 before:size-0 before:mr-0'
+                        ]"
+                    >
                         <span>{{ link.label }}</span>
-                    </NuxtLink>
+                    </a>
                 </li>
 
-                <li>
+                <!-- <li>
                     <NuxtLink external target="_blank" to="mailto:hello@giusscos.com" title="Send an email to Giuseppe"
                         aria-label="Send an email to hello@giusscos.com"
                         class="hover:text-amber-600 font-medium transition-colors duration-500 ease-in-out whitespace-nowrap">
                         hello@giusscos.com
                     </NuxtLink>
-                </li>
+                </li> -->
 
                 <li>
                     <BookCallButton />
@@ -126,19 +178,21 @@ const toggleMenu = () => {
                             transitionDelay: isMenuOpen ? `${index * 100}ms` : `${(links.length - index - 1) * 50}ms`
                         }"
                     >
-                        <NuxtLink 
-                            :to="link.to" 
-                            :title="link.title" 
-                            :aria-label="link.label" 
-                            active-class="before:size-2"
-                            class="flex items-center gap-2 hover:text-amber-600 transition-colors duration-300 font-medium whitespace-nowrap before:content-[''] before:size-0 before:rounded-full before:transition-all before:duration-300 before:bg-amber-600"
-                            @click="toggleMenu"
+                        <a
+                            :href="link.to"
+                            :title="link.title"
+                            :aria-label="link.label"
+                            @click.prevent="scrollToSection(link.to.replace('#', ''))"
+                            :class="[
+                              'flex items-center gap-2 transition-colors duration-300 font-medium whitespace-nowrap before:content-[\'\'] before:rounded-full before:transition-all before:duration-300 before:bg-amber-600',
+                              activeSection === link.to.replace('#', '') ? 'text-amber-600 font-bold before:size-2 before:mr-2' : 'hover:text-amber-600 before:size-0 before:mr-0'
+                            ]"
                         >
-                            {{ link.label }}
-                        </NuxtLink>
+                            <span>{{ link.label }}</span>
+                        </a>
                     </li>
 
-                    <li class="transition-all duration-300"
+                    <!-- <li class="transition-all duration-300"
                         :style="{
                             opacity: isMenuOpen ? 1 : 0,
                             transform: isMenuOpen ? 'translateY(0)' : 'translateY(20px)',
@@ -156,7 +210,7 @@ const toggleMenu = () => {
                         >
                             hello@giusscos.com
                         </NuxtLink>
-                    </li>
+                    </li> -->
 
                     <li class="transition-all duration-300"
                         :style="{

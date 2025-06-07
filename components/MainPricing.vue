@@ -34,7 +34,7 @@ const pricingCards = [
 </script>
 
 <template>
-  <section class="min-h-screen flex items-center justify-center px-4 py-20 md:py-32 bg-neutral-50">
+  <section id="pricing" class="min-h-screen flex items-center justify-center px-4 py-20 md:py-32 bg-neutral-50">
     <div class="max-w-5xl mx-auto w-full text-center space-y-8">
       <div class="space-y-4">
         <h2 class="text-4xl md:text-5xl font-bold text-neutral-900">
