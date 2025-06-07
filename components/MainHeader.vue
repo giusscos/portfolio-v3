@@ -10,22 +10,22 @@ type MainNavLink = {
 
 const links = ref<MainNavLink[]>([
     {
-        id: "sdsd",
-        title: "Navigate to Works page",
+        id: "works",
+        title: "Scroll to Works section",
         label: "Works",
-        to: "/works"
+        to: "#works"
     },
     {
-        id: "sssdd",
-        title: "Navigate to About page",
-        label: "About",
-        to: "/about"
+        id: "how",
+        title: "Scroll to How section",
+        label: "How",
+        to: "#how"
     },
     {
-        id: "sdsdsd",
-        title: "Navigate to Use Cases page",
-        label: "Use Cases",
-        to: "/use-cases"
+        id: "pricing",
+        title: "Scroll to Pricing section",
+        label: "Pricing",
+        to: "#pricing"
     }
 ])
 

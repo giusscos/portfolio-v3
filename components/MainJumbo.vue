@@ -12,8 +12,8 @@ const services = ref([
 <template>
     <section class="min-h-screen flex items-center justify-center px-4 py-20 md:py-32">
         <div class="max-w-4xl mx-auto text-center space-y-8">
-            <h1 class="text-4xl md:text-6xl font-bold text-neutral-900">
-                Crafting Digital Experiences in <span class="bg-amber-500">Weeks</span>, not months
+            <h1 class="text-4xl md:text-6xl font-bold text-neutral-900 leading-normal">
+                Creating Websites & Native iOS Apps in <span class="bg-amber-500">Weeks</span>, not months
             </h1>
             
             <p class="text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto">

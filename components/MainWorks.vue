@@ -3,27 +3,48 @@ import { ref } from 'vue';
 
 const works = ref([
     {
-        id: 1,
-        title: "Project One",
-        description: "A modern web application built with Vue.js and Tailwind CSS",
-        image: "/works/project1.jpg",
-        tags: ["Vue.js", "Tailwind CSS", "Nuxt"]
+        id: 'bonded',
+        title: 'Bonded app',
+        image: '/works/contra-bonded.png',
+        href: 'https://giusscos.com/p/olkvl33v-self-reflection-and-social-interaction-app-development',
     },
     {
-        id: 2,
-        title: "Project Two",
-        description: "iOS app for managing daily tasks and productivity",
-        image: "/works/project2.jpg",
-        tags: ["Swift", "iOS", "SwiftUI"]
+        id: 'blackswan',
+        title: 'Black Swan app',
+        image: '/works/contra-blackswan.png',
+        href: 'https://giusscos.com/p/ZFmUbcrb-black-swan-event-categorization-app-development',
     },
     {
-        id: 3,
-        title: "Project Three",
-        description: "E-commerce platform with real-time inventory management",
-        image: "/works/project3.jpg",
-        tags: ["React", "Node.js", "MongoDB"]
+        id: 'byjo',
+        title: 'ByJo app',
+        image: '/works/contra-byjo.png',
+        href: 'https://giusscos.com/p/rZYLRsN3-innovative-i-os-personal-finance-app-for-apple-store',
+    },
+    {
+        id: 'pomotask',
+        title: 'Pomotask app',
+        image: '/works/contra-pomotask.png',
+        href: 'https://giusscos.com/p/vqeLUOAk-pomotask-build-focus-quickly-and-reduce-distraction',
+    },
+    {
+        id: 'foo',
+        title: 'Foo app',
+        image: '/works/contra-foo.png',
+        href: 'https://giusscos.com/p/qULkgFm7-foo-food-and-recipe-assistant',
     }
 ]);
+
+const current = ref(0);
+function prev() {
+    current.value = (current.value - 1 + works.value.length) % works.value.length;
+}
+function next() {
+    current.value = (current.value + 1) % works.value.length;
+}
+
+// Dimensioni costanti per il calcolo della traslazione
+const themeWidth = 160; // px, larghezza immagine (w-40)
+const themeGap = 24; // px, gap tra immagini (md:gap-6)
 </script>
 
 <template>
@@ -38,43 +59,21 @@ const works = ref([
                 </p>
             </div>
 
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div 
-                    v-for="work in works" 
+            <div class="w-full flex flex-wrap justify-center gap-8 mt-12">
+                <a
+                    v-for="work in works"
                     :key="work.id"
-                    class="group bg-white border border-neutral-200 rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+                    :href="work.href"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="w-full md:w-[calc(50%-1rem)] flex flex-col items-center bg-white p-6 transition-transform duration-300 hover:scale-105 focus:scale-105"
                 >
-                    <div class="relative h-48">
-                        <NuxtImg 
-                            :src="work.image" 
-                            :alt="work.title"
-                            class="w-full h-full object-cover"
-                            loading="lazy"
-                        />
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <h3 class="text-xl font-semibold text-neutral-900">{{ work.title }}</h3>
-                        <p class="text-neutral-600">{{ work.description }}</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span 
-                                v-for="tag in work.tags" 
-                                :key="tag"
-                                class="px-3 py-1 text-sm bg-amber-100 text-amber-800 rounded-full"
-                            >
-                                {{ tag }}
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                    <NuxtImg :src="work.image" :alt="work.title" class="w-full h-auto object-contain" />
+                    <h3 class="mt-4 text-lg font-semibold text-neutral-900 text-center">
+                        {{ work.title }}
+                    </h3>
+                </a>
             </div>
-
-            <NuxtLink 
-                to="/works" 
-                class="group inline-flex items-center gap-2 px-8 py-3 rounded-full border-2 border-neutral-900 hover:bg-neutral-900 hover:text-white font-medium hover:shadow-md shadow-amber-600 transition duration-500 ease-in-out"
-            >
-                View all works
-                <LIconArrowUpRight class="size-5 rotate-45 group-hover:rotate-0 transition-transform duration-500" />
-            </NuxtLink>
         </div>
     </section>
 </template>
@@ -84,6 +83,7 @@ const works = ref([
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
